@@ -1,15 +1,15 @@
-﻿import recipes from "@/data/recipes.json";
+import recipes from "@/data/recipes.json";
+
+// Helper para persistencia local real
+const getStoredUser = () => {
+  if (typeof window !== "undefined") {
+    const user = localStorage.getItem("supabase_user");
+    return user ? JSON.parse(user) : null;
+  }
+  return null;
+};
 
 export const createClient = () => {
-  // Simular persistencia con localStorage si estamos en el navegador
-  const getStoredUser = () => {
-    if (typeof window !== "undefined") {
-      const user = localStorage.getItem("supabase_user");
-      return user ? JSON.parse(user) : null;
-    }
-    return null;
-  };
-
   return {
     from: (table: string) => ({
       select: () => ({
@@ -20,17 +20,25 @@ export const createClient = () => {
     }),
     auth: {
       getUser: () => {
-        const user = getStoredUser() || { email: "invitado@local.com", user_metadata: { full_name: "Invitado" } };
+        const user = getStoredUser();
         return Promise.resolve({ data: { user } });
       },
       signInWithOAuth: ({ provider }: { provider: string }) => {
-        const mockUser = { email: `usuario_${provider}@test.com`, user_metadata: { full_name: `Usuario ${provider}` } };
-        if (typeof window !== "undefined") localStorage.setItem("supabase_user", JSON.stringify(mockUser));
+        const mockUser = { 
+          id: "user_123",
+          email: `usuario_${provider}@test.com`, 
+          user_metadata: { full_name: `Usuario ${provider}` } 
+        };
+        if (typeof window !== "undefined") {
+          localStorage.setItem("supabase_user", JSON.stringify(mockUser));
+        }
         window.location.href = "/private";
         return Promise.resolve();
       },
       signOut: () => {
-        if (typeof window !== "undefined") localStorage.removeItem("supabase_user");
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("supabase_user");
+        }
         window.location.href = "/";
         return Promise.resolve();
       }
