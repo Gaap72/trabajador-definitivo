@@ -1,22 +1,57 @@
 [
   {
     "id": "1",
-    "title": "Pasta Pesto",
-    "description": "Classic Italian recipe, fast and delicious.",
+    "title": "Pasta Pesto Casera",
+    "description": "Una receta italiana clÃ¡sica con albahaca fresca y piÃ±ones.",
     "category": "Almuerzo",
     "calories": 450,
-    "ingredients": ["Pasta", "Basil", "Pine nuts", "Olive Oil", "Garlic", "Parmesan"],
-    "steps": ["Boil pasta", "Blend basil, garlic and nuts", "Mix with oil and cheese", "Toss with pasta"],
+    "image_url": "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["Pasta", "Albahaca", "PiÃ±ones", "Aceite de Oliva", "Ajo", "Queso Parmesano"],
+    "steps": ["Cocer la pasta al dente.", "Triturar albahaca, ajo y piÃ±ones.", "Mezclar con aceite y queso.", "Combinar con la pasta caliente."],
     "is_public": true
   },
   {
     "id": "2",
-    "title": "Quinoa Salad",
-    "description": "Fresh and nutritious for a light dinner.",
+    "title": "Ensalada de Quinoa",
+    "description": "Nutritiva, fresca y perfecta para una cena ligera.",
     "category": "Cena",
     "calories": 320,
-    "ingredients": ["Quinoa", "Avocado", "Tomato", "Cucumber", "Lemon"],
-    "steps": ["Cook quinoa", "Chop vegetables", "Mix in a bowl", "Dress with lemon and salt"],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["Quinoa", "Aguacate", "Tomate Cherry", "Pepino", "LimÃ³n"],
+    "steps": ["Lavar y cocer la quinoa.", "Cortar las verduras en cubos.", "Mezclar todo en un bol grande.", "AliÃ±ar con limÃ³n y sal al gusto."],
+    "is_public": true
+  },
+  {
+    "id": "3",
+    "title": "Tacos de Pollo al Pastor",
+    "description": "Sabor autÃ©ntico mexicano con piÃ±a y especias.",
+    "category": "Cena",
+    "calories": 550,
+    "image_url": "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["Tortillas de maÃ­z", "Pechuga de pollo", "Achiote", "PiÃ±a", "Cebolla", "Cilantro"],
+    "steps": ["Marinar el pollo con achiote y especias.", "Asar el pollo y la piÃ±a.", "Picar finamente.", "Servir en tortillas con cebolla y cilantro."],
+    "is_public": true
+  },
+  {
+    "id": "4",
+    "title": "Pancakes de ArÃ¡ndanos",
+    "description": "Esponjosos y dulces, el desayuno ideal del fin de semana.",
+    "category": "Desayuno",
+    "calories": 400,
+    "image_url": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["Harina", "Huevos", "Leche", "ArÃ¡ndanos frescos", "Mantequilla", "Miel"],
+    "steps": ["Mezclar ingredientes secos y hÃºmedos.", "Incorporar los arÃ¡ndanos suavemente.", "Cocinar en una sartÃ©n caliente con mantequilla.", "Servir con miel."],
+    "is_public": true
+  },
+  {
+    "id": "5",
+    "title": "SalmÃ³n a las Hierbas",
+    "description": "SalmÃ³n fresco al horno con un toque de romero y limÃ³n.",
+    "category": "Almuerzo",
+    "calories": 380,
+    "image_url": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["Filete de salmÃ³n", "Romero fresco", "LimÃ³n", "Aceite de oliva", "Pimienta negra"],
+    "steps": ["Precalentar el horno a 200Â°C.", "Colocar el salmÃ³n en una bandeja.", "Sazonar con hierbas, limÃ³n y aceite.", "Hornear por 15-18 minutos."],
     "is_public": true
   }
 ]
