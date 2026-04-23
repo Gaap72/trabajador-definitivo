@@ -1,134 +1,1102 @@
 [
-  {
-    "id": "1",
-    "title": "Pasta Pesto Casera",
-    "description": "Una receta italiana clasica con albahaca fresca de huerto, piñones tostados y el mejor aceite de oliva extra virgen.",
-    "category": "Almuerzo",
-    "calories": 450,
-    "image_url": "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["400g de Pasta (Espagueti o Penne)", "2 tazas de hojas de Albahaca fresca", "1/2 taza de Piñones o nueces", "2 dientes de Ajo grandes", "1/2 taza de Aceite de Oliva", "1/2 taza de Queso Parmesano rallado", "Sal y Pimienta al gusto"],
-    "steps": ["Poner a hervir 4 litros de agua con una cucharada de sal.", "Lavar y secar bien las hojas de albahaca fresca.", "En un mortero o procesadora, triturar el ajo con los piñones hasta formar una pasta.", "Agregar la albahaca y seguir triturando mientras se vierte el aceite de oliva en un chorro fino.", "Mezclar con el queso parmesano y reservar.", "Cocinar la pasta segun las instrucciones del paquete hasta que este al dente.", "Reservar media taza del agua de coccion de la pasta.", "Mezclar la pasta caliente con el pesto preparado, añadiendo el agua reservada si es necesario para dar cremosidad.", "Servir inmediatamente con mas queso por encima."],
-    "is_public": true
-  },
-  {
-    "id": "2",
-    "title": "Ensalada de Quinoa Real",
-    "description": "Superalimento nutritivo, fresco y perfecto para una cena ligera o como acompañamiento de proteinas.",
-    "category": "Cena",
-    "calories": 320,
-    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["1 taza de Quinoa cruda", "2 tazas de Agua o caldo vegetal", "1 Aguacate maduro", "1 taza de Tomates Cherry", "1 Pepino pequeño", "Zumo de 1 Limon grande", "2 cucharadas de Aceite de Oliva", "Cilantro fresco picado", "Sal al gusto"],
-    "steps": ["Lavar la quinoa bajo el grifo hasta que el agua salga clara para quitar el amargor.", "En una olla, poner la quinoa con el agua y una pizca de sal. Llevar a ebullicion.", "Reducir el fuego, tapar y cocinar por 15 minutos hasta que el agua se absorba.", "Retirar del fuego y dejar reposar 5 minutos tapada.", "Cortar el aguacate en cubos, los tomates cherry por la mitad y el pepino en rodajas finas.", "En un bol grande, mezclar la quinoa ya fria con las verduras.", "Aliñar con el zumo de limon, el aceite de oliva y el cilantro.", "Mezclar suavemente para no deshacer el aguacate.", "Servir fresca."],
-    "is_public": true
-  },
-  {
-    "id": "3",
-    "title": "Tacos de Pollo al Pastor",
-    "description": "Sabor autentico mexicano con marinado artesanal de achiote, piña asada y tortillas recien hechas.",
-    "category": "Cena",
-    "calories": 550,
-    "image_url": "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["12 Tortillas de maiz", "500g de Pechuga de pollo cortada en tiras", "3 cucharadas de Pasta de Achiote", "1/2 taza de Zumo de Naranja", "1/2 Piña fresca cortada en rebanadas", "1 Cebolla blanca picada", "1 manojo de Cilantro fresco", "Sal y Comino"],
-    "steps": ["Disolver el achiote en el zumo de naranja con sal y comino.", "Marinar el pollo en esta mezcla durante al menos 2 horas (mejor toda la noche).", "Asar el pollo en una sarten muy caliente hasta que este bien dorado y cocido.", "Asar las rebanadas de piña hasta que se caramelicen y cortarlas en cubitos.", "Calentar las tortillas de maiz.", "Armar los tacos con el pollo, la piña asada, cebolla cruda y cilantro picado.", "Servir con limones y tu salsa picante favorita."],
-    "is_public": true
-  },
-  {
-    "id": "4",
-    "title": "Pancakes de Arandanos",
-    "description": "Esponjosos, dulces y llenos de antioxidantes. El desayuno ideal para mimarse el fin de semana.",
-    "category": "Desayuno",
-    "calories": 400,
-    "image_url": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["1 1/2 tazas de Harina de trigo", "1 taza de Leche", "1 Huevo grande", "1 taza de Arandanos frescos", "2 cucharaditas de Levadura quimica", "1 cucharada de Mantequilla derretida", "Miel de abeja o maple", "Esencia de Vainilla"],
-    "steps": ["En un bol, tamizar la harina con la levadura.", "En otro bol, batir el huevo con la leche, la mantequilla derretida y la vainilla.", "Verter los liquidos sobre los secos y mezclar lo justo (no sobrebatir).", "Incorporar los arandanos suavemente con una espatula.", "Calentar una sarten antiadherente a fuego medio y engrasar ligeramente.", "Verter un cucharon de masa por pancake.", "Cocinar hasta que salgan burbujas en la superficie, dar la vuelta y dorar por el otro lado.", "Servir calientes con abundante miel."],
-    "is_public": true
-  },
-  {
-    "id": "5",
-    "title": "Salmon a las Finas Hierbas",
-    "description": "Salmon fresco horneado a la perfeccion con un aroma irresistible a romero y limon.",
-    "category": "Almuerzo",
-    "calories": 380,
-    "image_url": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["2 Filetes de Salmon fresco", "1 Romero fresco picado", "1 Limon en rodajas", "3 cucharadas de Aceite de oliva", "2 dientes de Ajo picados", "Pimienta negra molida", "Sal gruesa"],
-    "steps": ["Precalentar el horno a 200 grados Celsius.", "Preparar una bandeja de horno con papel de aluminio.", "Colocar los filetes de salmon en la bandeja con la piel hacia abajo.", "Frotar el salmon con el ajo picado, el romero, sal y pimienta.", "Rociar con el aceite de oliva y colocar rodajas de limon encima.", "Hornear durante 15 a 18 minutos dependiendo del grosor del pescado.", "El salmon debe desmenuzarse facilmente con un tenedor al estar listo.", "Servir con esparragos o patatas asadas."],
-    "is_public": true
-  },
-  {
-    "id": "6",
-    "title": "Bruschetta de Tomate y Albahaca",
-    "description": "El entrante italiano por excelencia. Sencillo, crujiente y lleno de frescura mediterranea.",
-    "category": "Entrante",
-    "calories": 150,
-    "image_url": "https://images.unsplash.com/photo-1572656631137-7935297eff55?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["1 Pan baguette artesanal", "4 Tomates maduros firmes", "2 dientes de Ajo", "10 hojas de Albahaca", "Aceite de Oliva Extra Virgen", "Sal y Vinagre Balsamico"],
-    "steps": ["Cortar el pan en rebanadas de 2 cm y tostarlas ligeramente.", "Picar los tomates en cubitos pequeños descartando las semillas.", "Picar finamente la albahaca.", "Mezclar el tomate y la albahaca con aceite, sal y unas gotas de vinagre.", "Frotar el pan caliente con un diente de ajo cortado a la mitad.", "Colocar una generosa porcion de la mezcla de tomate sobre el pan.", "Decorar con un hilo de aceite y servir inmediatamente."],
-    "is_public": true
-  },
-  {
-    "id": "7",
-    "title": "Ceviche de Pescado Blanco",
-    "description": "Refrescante plato latino marinado en zumo de limon con un toque picante y cebolla morada.",
-    "category": "Entrante",
-    "calories": 210,
-    "image_url": "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["500g de Lomo de pescado blanco (Corvina o Tilapia)", "1/2 taza de Zumo de Limon recien exprimido", "1 Cebolla morada pequeña", "Cilantro picado", "1 Chile o Ají picado", "Sal y Maiz tostado"],
-    "steps": ["Limpiar el pescado y cortarlo en cubos de 1.5 cm.", "Poner el pescado en un bol frio y cubrirlo con el zumo de limon.", "Marinar en el frigorifico durante 15 a 20 minutos (no mas tiempo para no sobrecocer).", "Cortar la cebolla en plumas muy finas y lavar con agua fria.", "Mezclar el pescado marinado con la cebolla, el cilantro y el chile picado.", "Sazonar con sal al gusto.", "Servir muy frio acompañado de maiz tostado o rodajas de camote."],
-    "is_public": true
-  },
-  {
-    "id": "8",
-    "title": "Mousse de Chocolate Oscuro",
-    "description": "Postre aireado, suave y elegante para los verdaderos amantes del cacao intenso.",
-    "category": "Postre",
-    "calories": 280,
-    "image_url": "https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["200g de Chocolate negro (70% cacao)", "4 Huevos (separar yemas de claras)", "200ml de Nata para montar", "2 cucharadas de Azucar", "Pizca de sal"],
-    "steps": ["Derretir el chocolate al baño maria o en el microondas a intervalos cortos.", "Dejar que el chocolate pierda temperatura.", "Añadir las yemas al chocolate y mezclar bien.", "Montar las claras a punto de nieve con la pizca de sal y el azucar.", "Montar la nata hasta que este firme.", "Mezclar suavemente la nata con el chocolate.", "Incorporar las claras montadas con movimientos envolventes para no perder el aire.", "Repartir en copas y dejar enfriar al menos 4 horas en el refrigerador.", "Servir con virutas de chocolate encima."],
-    "is_public": true
-  },
-  {
-    "id": "9",
-    "title": "Tostadas con Huevo y Aguacate",
-    "description": "Un desayuno equilibrado con grasas saludables, proteina y carbohidratos complejos.",
-    "category": "Desayuno",
-    "calories": 350,
-    "image_url": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["2 rebanadas de Pan Integral", "1 Aguacate maduro", "2 Huevos grandes", "Semillas de Sesamo", "Chile seco en escamas", "Sal y Pimienta"],
-    "steps": ["Tostar las rebanadas de pan integral hasta que esten crujientes.", "Machacar el aguacate en un bol con sal y pimienta.", "Cocinar los huevos a la plancha o escalfados (poché).", "Untar el aguacate generosamente sobre las tostadas.", "Colocar un huevo encima de cada tostada.", "Decorar con semillas de sesamo y chile en escamas.", "Disfrutar caliente."],
-    "is_public": true
-  },
-  {
-    "id": "10",
-    "title": "Hamburguesa Vegana de Lentejas",
-    "description": "Una alternativa deliciosa y carnosa hecha a base de legumbres y especias naturales.",
-    "category": "Almuerzo",
-    "calories": 420,
-    "image_url": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["2 tazas de Lentejas cocidas", "1/2 taza de Pan rallado", "1 Cebolla picada y salteada", "1 cucharadita de Comino y Pimenton", "Pan de hamburguesa", "Lechuga y Tomate", "Salsa vegana"],
-    "steps": ["Procesar las lentejas cocidas hasta obtener una pasta granulosa (no pure total).", "Mezclar en un bol con la cebolla salteada, el pan rallado y las especias.", "Formar discos con las manos y refrigerar 20 minutos para que tomen consistencia.", "Cocinar a la plancha con poco aceite 5 minutos por lado.", "Armar la hamburguesa con pan tostado, lechuga fresca, rodajas de tomate y salsa.", "Servir con patatas fritas saludables."],
-    "is_public": true
-  },
-  {
-    "id": "11",
-    "title": "Arroz con Leche Cremoso",
-    "description": "El postre tradicional de la abuela, con un toque de canela y piel de limon.",
-    "category": "Postre",
-    "calories": 300,
-    "image_url": "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["1 taza de Arroz redondo", "1 litro de Leche entera", "1 rama de Canela", "Piel de 1 Limon", "1/2 taza de Azucar", "Canela en polvo"],
-    "steps": ["En una olla grande, poner la leche con la canela y la piel de limon a fuego medio.", "Cuando empiece a hervir, añadir el arroz y bajar el fuego al minimo.", "Cocinar removiendo frecuentemente durante 40-45 minutos hasta que este cremoso.", "Añadir el azucar y cocinar 5 minutos mas.", "Retirar la canela y el limon.", "Dejar templar y repartir en boles.", "Espolvorear canela en polvo antes de servir."],
-    "is_public": true
-  },
-  {
-    "id": "12",
-    "title": "Chilaquiles Rojos con Huevo",
-    "description": "Clasico desayuno mexicano para empezar el dia con mucha energia y sabor.",
-    "category": "Desayuno",
-    "calories": 580,
-    "image_url": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=800&q=80",
-    "ingredients": ["100g de Totopos de maiz", "1 taza de Salsa roja de tomate", "2 Huevos fritos", "Queso fresco desmoronado", "Crema acida", "Cebolla morada"],
-    "steps": ["Calentar la salsa roja en una sarten grande.", "Añadir los totopos y mezclar rapidamente para que se bañen en salsa pero no pierdan el crujiente.", "Servir en un plato hondo.", "Colocar los huevos fritos encima.", "Decorar con crema, queso fresco, cebolla morada y cilantro.", "Comer inmediatamente."],
-    "is_public": true
-  }
+    {
+        "id":  "1",
+        "title":  "Pasta Pesto Casera",
+        "description":  "Una receta italiana clasica con albahaca fresca de huerto, piñones tostados y el mejor aceite de oliva extra virgen.",
+        "category":  "Almuerzo",
+        "calories":  450,
+        "image_url":  "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "400g de Pasta",
+                            "2 tazas de Albahaca fresca",
+                            "1/2 taza de Piñones",
+                            "2 dientes de Ajo",
+                            "1/2 taza de Aceite de Oliva",
+                            "Queso Parmesano"
+                        ],
+        "steps":  [
+                      "Cocer la pasta al dente.",
+                      "Triturar ajo y piñones.",
+                      "Añadir albahaca y aceite poco a poco.",
+                      "Mezclar con pasta y queso."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "2",
+        "title":  "Ensalada de Quinoa Real",
+        "description":  "Superalimento nutritivo, fresco y perfecto para una cena ligera.",
+        "category":  "Cena",
+        "calories":  320,
+        "image_url":  "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "1 taza de Quinoa",
+                            "1 Aguacate",
+                            "Tomates Cherry",
+                            "Pepino",
+                            "Limon",
+                            "Aceite de Oliva"
+                        ],
+        "steps":  [
+                      "Lavar y cocer la quinoa.",
+                      "Cortar verduras.",
+                      "Mezclar todo en un bol.",
+                      "Aliñar y servir."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "3",
+        "title":  "Tacos de Pollo al Pastor",
+        "description":  "Sabor autentico mexicano con marinado artesanal de achiote y piña asada.",
+        "category":  "Cena",
+        "calories":  550,
+        "image_url":  "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Tortillas de maiz",
+                            "Pechuga de pollo",
+                            "Achiote",
+                            "Zumo de Naranja",
+                            "Piña",
+                            "Cilantro"
+                        ],
+        "steps":  [
+                      "Marinar el pollo.",
+                      "Asar pollo y piña.",
+                      "Picar y servir en tortillas."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "4",
+        "title":  "Pancakes de Arandanos",
+        "description":  "Esponjosos, dulces y el desayuno ideal del fin de semana.",
+        "category":  "Desayuno",
+        "calories":  400,
+        "image_url":  "https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Harina",
+                            "Leche",
+                            "Huevo",
+                            "Arandanos",
+                            "Levadura",
+                            "Miel"
+                        ],
+        "steps":  [
+                      "Mezclar secos y liquidos.",
+                      "Añadir arandanos.",
+                      "Cocinar en sarten.",
+                      "Servir con miel."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "5",
+        "title":  "Salmon a las Finas Hierbas",
+        "description":  "Salmon fresco horneado con aroma a romero y limon.",
+        "category":  "Almuerzo",
+        "calories":  380,
+        "image_url":  "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Filete de Salmon",
+                            "Romero",
+                            "Limon",
+                            "Aceite de Oliva",
+                            "Ajo",
+                            "Sal gruesa"
+                        ],
+        "steps":  [
+                      "Precalentar horno a 200C.",
+                      "Sazonar salmon.",
+                      "Hornear 15-18 min.",
+                      "Servir caliente."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "6",
+        "title":  "Bruschetta de Tomate",
+        "description":  "Entrante italiano crujiente y sabroso.",
+        "category":  "Entrante",
+        "calories":  150,
+        "image_url":  "https://images.unsplash.com/photo-1572656631137-7935297eff55?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Pan Baguette",
+                            "Tomates",
+                            "Ajo",
+                            "Albahaca",
+                            "Aceite de Oliva"
+                        ],
+        "steps":  [
+                      "Tostar pan.",
+                      "Picar tomates y albahaca.",
+                      "Mezclar con aceite.",
+                      "Montar sobre el pan."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "7",
+        "title":  "Ceviche de Pescado",
+        "description":  "Refrescante plato latino marinado en limon.",
+        "category":  "Entrante",
+        "calories":  210,
+        "image_url":  "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Pescado blanco",
+                            "Limon",
+                            "Cebolla morada",
+                            "Cilantro",
+                            "Chile"
+                        ],
+        "steps":  [
+                      "Picar pescado.",
+                      "Marinar en limon.",
+                      "Añadir cebolla y cilantro.",
+                      "Servir frio."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "8",
+        "title":  "Mousse de Chocolate",
+        "description":  "Postre aireado y elegante para amantes del cacao.",
+        "category":  "Postre",
+        "calories":  280,
+        "image_url":  "https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Chocolate negro",
+                            "Huevos",
+                            "Nata",
+                            "Azucar"
+                        ],
+        "steps":  [
+                      "Derretir chocolate.",
+                      "Montar claras.",
+                      "Mezclar todo suavemente.",
+                      "Enfriar 4 horas."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "9",
+        "title":  "Lasagna Bolognesa",
+        "description":  "Capas de pasta, carne y bechamel gratinadas.",
+        "category":  "Almuerzo",
+        "calories":  650,
+        "image_url":  "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Pasta Lasagna",
+                            "Carne picada",
+                            "Tomate",
+                            "Bechamel",
+                            "Queso"
+                        ],
+        "steps":  [
+                      "Hacer salsa de carne.",
+                      "Montar capas.",
+                      "Hornear 30 min.",
+                      "Gratinar."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "10",
+        "title":  "Sushi Variado",
+        "description":  "Seleccion de nigiris y rolls japoneses.",
+        "category":  "Cena",
+        "calories":  400,
+        "image_url":  "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Arroz Sushi",
+                            "Vinagre arroz",
+                            "Alga Nori",
+                            "Salmon",
+                            "Atun"
+                        ],
+        "steps":  [
+                      "Cocer arroz.",
+                      "Aliñar arroz.",
+                      "Montar sushi.",
+                      "Servir con soja."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "11",
+        "title":  "Paella Valenciana",
+        "description":  "El clasico español con arroz, conejo y pollo.",
+        "category":  "Almuerzo",
+        "calories":  500,
+        "image_url":  "https://images.unsplash.com/photo-1534080564607-cc404a4c6840?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Arroz bomba",
+                            "Pollo",
+                            "Garrofo",
+                            "Judia verde",
+                            "Azafran"
+                        ],
+        "steps":  [
+                      "Sofreir carne.",
+                      "Añadir verdura.",
+                      "Poner arroz y caldo.",
+                      "Cocer sin mover."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "12",
+        "title":  "Brownie con Nueces",
+        "description":  "Bizcocho denso de chocolate con trozos de nuez.",
+        "category":  "Postre",
+        "calories":  350,
+        "image_url":  "https://images.unsplash.com/photo-1543255006-d6395b6f1171?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Chocolate",
+                            "Mantequilla",
+                            "Azucar",
+                            "Harina",
+                            "Nueces"
+                        ],
+        "steps":  [
+                      "Mezclar chocolate y mantequilla.",
+                      "Añadir huevos y azucar.",
+                      "Poner harina y nueces.",
+                      "Hornear 25 min."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "13",
+        "title":  "Risotto de Setas",
+        "description":  "Arroz cremoso italiano con hongos silvestres.",
+        "category":  "Almuerzo",
+        "calories":  420,
+        "image_url":  "https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Arroz Arborio",
+                            "Setas",
+                            "Caldo",
+                            "Mantequilla",
+                            "Parmesano"
+                        ],
+        "steps":  [
+                      "Saltear setas.",
+                      "Añadir arroz.",
+                      "Poner caldo poco a poco.",
+                      "Mantecar."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "14",
+        "title":  "Gazpacho Andaluz",
+        "description":  "Sopa fria de tomate y hortalizas crudas.",
+        "category":  "Entrante",
+        "calories":  120,
+        "image_url":  "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Tomate",
+                            "Pepino",
+                            "Pimiento",
+                            "Aceite",
+                            "Vinagre",
+                            "Pan"
+                        ],
+        "steps":  [
+                      "Trocear verduras.",
+                      "Triturar todo.",
+                      "Añadir aceite y vinagre.",
+                      "Colar y enfriar."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "15",
+        "title":  "Ratatouille",
+        "description":  "Guiso tradicional frances de verduras.",
+        "category":  "Cena",
+        "calories":  180,
+        "image_url":  "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Berenjena",
+                            "Calabacin",
+                            "Tomate",
+                            "Pimiento",
+                            "Hierbas"
+                        ],
+        "steps":  [
+                      "Cortar en rodajas.",
+                      "Disponer en fuente.",
+                      "Añadir salsa tomate.",
+                      "Hornear 1 hora."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "16",
+        "title":  "Hummus de Garbanzo",
+        "description":  "Crema de garbanzos oriental con tahini.",
+        "category":  "Entrante",
+        "calories":  160,
+        "image_url":  "https://images.unsplash.com/photo-1585937421612-71a008356fbe?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Garbanzos",
+                            "Tahini",
+                            "Limon",
+                            "Ajo",
+                            "Comino"
+                        ],
+        "steps":  [
+                      "Triturar garbanzos.",
+                      "Añadir resto ingredientes.",
+                      "Mezclar hasta cremoso.",
+                      "Servir con pimenton."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "17",
+        "title":  "Falafel Casero",
+        "description":  "Albóndigas crujientes de garbanzo y especias.",
+        "category":  "Almuerzo",
+        "calories":  300,
+        "image_url":  "https://images.unsplash.com/photo-1547000109-f62856176375?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Garbanzos remojados",
+                            "Perejil",
+                            "Cilantro",
+                            "Cebolla",
+                            "Comino"
+                        ],
+        "steps":  [
+                      "Triturar garbanzos.",
+                      "Añadir hierbas y especias.",
+                      "Formar bolas.",
+                      "Freir."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "18",
+        "title":  "Pad Thai de Langostinos",
+        "description":  "Fideos de arroz tailandeses agridulces.",
+        "category":  "Almuerzo",
+        "calories":  480,
+        "image_url":  "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Fideos arroz",
+                            "Langostinos",
+                            "Salsa Tamarindo",
+                            "Cacahuetes",
+                            "Lima"
+                        ],
+        "steps":  [
+                      "Hidratar fideos.",
+                      "Saltear langostinos.",
+                      "Añadir fideos y salsa.",
+                      "Decorar con cacahuete."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "19",
+        "title":  "Curry de Garbanzos",
+        "description":  "Plato indio especiado y reconfortante.",
+        "category":  "Cena",
+        "calories":  340,
+        "image_url":  "https://images.unsplash.com/photo-1585937421612-71a008356fbe?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Garbanzos",
+                            "Leche de coco",
+                            "Curry",
+                            "Cebolla",
+                            "Espinacas"
+                        ],
+        "steps":  [
+                      "Sofreir cebolla.",
+                      "Añadir curry y leche.",
+                      "Poner garbanzos.",
+                      "Cocer 15 min."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "20",
+        "title":  "Tiramisu Italiano",
+        "description":  "Postre de cafe, mascarpone y bizcochos.",
+        "category":  "Postre",
+        "calories":  450,
+        "image_url":  "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Mascarpone",
+                            "Cafe",
+                            "Bizcochos",
+                            "Huevos",
+                            "Cacao"
+                        ],
+        "steps":  [
+                      "Montar crema.",
+                      "Mojar bizcochos en cafe.",
+                      "Montar capas.",
+                      "Espolvorear cacao."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "21",
+        "title":  "Quiche Lorraine",
+        "description":  "Tarta salada francesa con bacon y nata.",
+        "category":  "Almuerzo",
+        "calories":  480,
+        "image_url":  "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Masa quebrada",
+                            "Bacon",
+                            "Huevos",
+                            "Nata",
+                            "Queso Gruyere"
+                        ],
+        "steps":  [
+                      "Hornear masa.",
+                      "Sofreir bacon.",
+                      "Mezclar liquidos.",
+                      "Hornear 30 min."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "22",
+        "title":  "Couscous con Verduras",
+        "description":  "Sémola de trigo con hortalizas y especias morunas.",
+        "category":  "Cena",
+        "calories":  290,
+        "image_url":  "https://images.unsplash.com/photo-1541518763669-27f70411ffbb?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Sémola",
+                            "Zanahoria",
+                            "Calabacin",
+                            "Garbanzos",
+                            "Ras el hanout"
+                        ],
+        "steps":  [
+                      "Hidratar sémola.",
+                      "Guisar verduras.",
+                      "Mezclar y servir."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "23",
+        "title":  "Goulash Hungaro",
+        "description":  "Estofado de carne con pimenton y verduras.",
+        "category":  "Almuerzo",
+        "calories":  520,
+        "image_url":  "https://images.unsplash.com/photo-1594041680534-e8c8cdebd679?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Ternera",
+                            "Pimenton",
+                            "Cebolla",
+                            "Caldo",
+                            "Patatas"
+                        ],
+        "steps":  [
+                      "Sofreir carne.",
+                      "Añadir cebolla y pimenton.",
+                      "Poner caldo.",
+                      "Cocinar 2 horas."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "24",
+        "title":  "Burritos de Carne",
+        "description":  "Tortillas de trigo rellenas de carne y frijoles.",
+        "category":  "Cena",
+        "calories":  600,
+        "image_url":  "https://images.unsplash.com/photo-1584031036380-3fb6f2d51880?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Tortillas trigo",
+                            "Carne picada",
+                            "Arroz",
+                            "Frijoles",
+                            "Queso"
+                        ],
+        "steps":  [
+                      "Cocinar carne.",
+                      "Calentar tortillas.",
+                      "Rellenar y enrollar."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "25",
+        "title":  "Sopa de Cebolla",
+        "description":  "Clasico frances gratinado con queso y pan.",
+        "category":  "Entrante",
+        "calories":  310,
+        "image_url":  "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Cebolla",
+                            "Caldo carne",
+                            "Pan",
+                            "Queso Emmental"
+                        ],
+        "steps":  [
+                      "Caramelizar cebolla.",
+                      "Añadir caldo.",
+                      "Poner pan y queso.",
+                      "Gratinar."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "26",
+        "title":  "Crepes de Fresas",
+        "description":  "Masa fina francesa rellena de fruta y chocolate.",
+        "category":  "Postre",
+        "calories":  240,
+        "image_url":  "https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Harina",
+                            "Leche",
+                            "Huevos",
+                            "Fresas",
+                            "Nutella"
+                        ],
+        "steps":  [
+                      "Hacer masa.",
+                      "Cocinar crepes.",
+                      "Rellenar con fresas.",
+                      "Decorar."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "27",
+        "title":  "Moussaka Griega",
+        "description":  "Lasagna de berenjenas y cordero.",
+        "category":  "Almuerzo",
+        "calories":  550,
+        "image_url":  "https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Berenjena",
+                            "Carne cordero",
+                            "Tomate",
+                            "Bechamel",
+                            "Queso"
+                        ],
+        "steps":  [
+                      "Freir berenjenas.",
+                      "Cocinar carne.",
+                      "Montar capas.",
+                      "Hornear."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "28",
+        "title":  "Salmorejo Cordobes",
+        "description":  "Crema fria espesa de tomate y pan.",
+        "category":  "Entrante",
+        "calories":  200,
+        "image_url":  "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Tomate",
+                            "Pan",
+                            "Aceite Oliva",
+                            "Ajo",
+                            "Huevo duro"
+                        ],
+        "steps":  [
+                      "Triturar todo.",
+                      "Emulsionar aceite.",
+                      "Enfriar.",
+                      "Decorar con huevo."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "29",
+        "title":  "Baklava",
+        "description":  "Pastel de hojaldre con nueces y miel.",
+        "category":  "Postre",
+        "calories":  380,
+        "image_url":  "https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Pasta filo",
+                            "Nueces",
+                            "Pistachos",
+                            "Mantequilla",
+                            "Miel"
+                        ],
+        "steps":  [
+                      "Montar capas filo.",
+                      "Añadir frutos secos.",
+                      "Hornear.",
+                      "Bañar en almibar."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "30",
+        "title":  "Ceviche de Camaron",
+        "description":  "Gambas frescas marinadas en lima y cilantro.",
+        "category":  "Entrante",
+        "calories":  190,
+        "image_url":  "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Gambas",
+                            "Lima",
+                            "Cebolla morada",
+                            "Cilantro",
+                            "Chile"
+                        ],
+        "steps":  [
+                      "Cocer gambas.",
+                      "Marinar en lima.",
+                      "Añadir verdura.",
+                      "Enfriar."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "31",
+        "title":  "Empanadas Argentinas",
+        "description":  "Masa rellena de carne, huevo y aceitunas.",
+        "category":  "Entrante",
+        "calories":  280,
+        "image_url":  "https://images.unsplash.com/photo-1541518763669-27f70411ffbb?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Masa empanada",
+                            "Carne",
+                            "Cebolla",
+                            "Huevo",
+                            "Aceitunas"
+                        ],
+        "steps":  [
+                      "Cocinar relleno.",
+                      "Rellenar masa.",
+                      "Cerrar y hornear."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "32",
+        "title":  "Aji de Gallina",
+        "description":  "Guiso peruano de pollo deshilachado.",
+        "category":  "Almuerzo",
+        "calories":  450,
+        "image_url":  "https://images.unsplash.com/photo-1562607311-408a2801ed00?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Pollo",
+                            "Aji amarillo",
+                            "Pan",
+                            "Leche",
+                            "Nueces"
+                        ],
+        "steps":  [
+                      "Cocer pollo.",
+                      "Licuar pan y aji.",
+                      "Mezclar y cocinar.",
+                      "Servir con arroz."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "33",
+        "title":  "Tom Yum Goong",
+        "description":  "Sopa tailandesa picante de langostinos.",
+        "category":  "Entrante",
+        "calories":  150,
+        "image_url":  "https://images.unsplash.com/photo-1548946526-f69e2424cf45?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Langostinos",
+                            "Galanga",
+                            "Lemongrass",
+                            "Chiles",
+                            "Setas"
+                        ],
+        "steps":  [
+                      "Hacer caldo.",
+                      "Añadir especias.",
+                      "Poner langostinos.",
+                      "Servir caliente."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "34",
+        "title":  "Dim Sum",
+        "description":  "Bocaditos chinos al vapor.",
+        "category":  "Entrante",
+        "calories":  220,
+        "image_url":  "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Masa gyoza",
+                            "Cerdo",
+                            "Langostino",
+                            "Cebollino",
+                            "Soja"
+                        ],
+        "steps":  [
+                      "Picar relleno.",
+                      "Rellenar masa.",
+                      "Cerrar saquitos.",
+                      "Cocer al vapor."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "35",
+        "title":  "Peking Duck",
+        "description":  "Pato asado crujiente con crepes y salsa.",
+        "category":  "Almuerzo",
+        "calories":  620,
+        "image_url":  "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Pato",
+                            "Miel",
+                            "Salsa Hoisin",
+                            "Pepino",
+                            "Crepes"
+                        ],
+        "steps":  [
+                      "Asar pato.",
+                      "Laminar carne.",
+                      "Preparar crepes.",
+                      "Montar rollitos."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "36",
+        "title":  "Poke Bowl",
+        "description":  "Bol de pescado crudo marinado con arroz.",
+        "category":  "Almuerzo",
+        "calories":  410,
+        "image_url":  "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Arroz",
+                            "Salmon",
+                            "Edamame",
+                            "Aguacate",
+                            "Mango"
+                        ],
+        "steps":  [
+                      "Cocer arroz.",
+                      "Picar pescado.",
+                      "Montar bol.",
+                      "Aliñar soja."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "37",
+        "title":  "Bibimbap",
+        "description":  "Bol coreano de arroz, verduras y huevo.",
+        "category":  "Cena",
+        "calories":  460,
+        "image_url":  "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Arroz",
+                            "Carne ternera",
+                            "Espinacas",
+                            "Zanahoria",
+                            "Gochujang"
+                        ],
+        "steps":  [
+                      "Saltear verduras.",
+                      "Cocinar carne.",
+                      "Montar bol.",
+                      "Poner huevo frito."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "38",
+        "title":  "Ramen Tonkotsu",
+        "description":  "Sopa japonesa de fideos con caldo de cerdo.",
+        "category":  "Cena",
+        "calories":  580,
+        "image_url":  "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Fideos ramen",
+                            "Caldo cerdo",
+                            "Chashu",
+                            "Huevo marinado",
+                            "Alga"
+                        ],
+        "steps":  [
+                      "Hacer caldo largo.",
+                      "Cocer fideos.",
+                      "Montar cuenco.",
+                      "Servir hirviendo."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "39",
+        "title":  "Pho Bo",
+        "description":  "Sopa vietnamita de ternera y fideos arroz.",
+        "category":  "Almuerzo",
+        "calories":  390,
+        "image_url":  "https://images.unsplash.com/photo-1503767835115-9fd671169a73?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Fideos arroz",
+                            "Ternera",
+                            "Anis estrellado",
+                            "Jengibre",
+                            "Lima"
+                        ],
+        "steps":  [
+                      "Hacer caldo especiado.",
+                      "Cocer fideos.",
+                      "Añadir ternera cruda.",
+                      "Aliñar lima."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "40",
+        "title":  "Falafel Bowl",
+        "description":  "Bol saludable de falafel y hummus.",
+        "category":  "Cena",
+        "calories":  320,
+        "image_url":  "https://images.unsplash.com/photo-1547000109-f62856176375?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Falafel",
+                            "Hummus",
+                            "Pepino",
+                            "Tomate",
+                            "Tahini"
+                        ],
+        "steps":  [
+                      "Freir falafel.",
+                      "Picar ensalada.",
+                      "Montar bol.",
+                      "Aliñar tahini."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "41",
+        "title":  "Banh Mi",
+        "description":  "Bocadillo vietnamita con pate y encurtidos.",
+        "category":  "Almuerzo",
+        "calories":  430,
+        "image_url":  "https://images.unsplash.com/photo-1509722747041-619f3936833d?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Baguette",
+                            "Cerdo",
+                            "Pate",
+                            "Daikon",
+                            "Cilantro"
+                        ],
+        "steps":  [
+                      "Tostar pan.",
+                      "Untar pate.",
+                      "Poner carne.",
+                      "Añadir encurtidos."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "42",
+        "title":  "Pastel de Belém",
+        "description":  "Tortitas de nata portuguesas.",
+        "category":  "Postre",
+        "calories":  190,
+        "image_url":  "https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Hojaldre",
+                            "Nata",
+                            "Yemas",
+                            "Azucar",
+                            "Canela"
+                        ],
+        "steps":  [
+                      "Forrar moldes hojaldre.",
+                      "Hacer crema nata.",
+                      "Rellenar.",
+                      "Hornear a tope."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "43",
+        "title":  "Gyoza de Pollo",
+        "description":  "Dumplings japoneses a la plancha.",
+        "category":  "Entrante",
+        "calories":  240,
+        "image_url":  "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Masa gyoza",
+                            "Pollo",
+                            "Col",
+                            "Jengibre",
+                            "Soja"
+                        ],
+        "steps":  [
+                      "Picar pollo.",
+                      "Rellenar y cerrar.",
+                      "Dorar base.",
+                      "Cocer vapor."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "44",
+        "title":  "Shakshuka",
+        "description":  "Huevos escalfados en salsa de tomate especiada.",
+        "category":  "Desayuno",
+        "calories":  310,
+        "image_url":  "https://images.unsplash.com/photo-1590412200988-a436bbd76088?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Huevos",
+                            "Tomate",
+                            "Pimiento",
+                            "Comino",
+                            "Feta"
+                        ],
+        "steps":  [
+                      "Guisar verduras.",
+                      "Romper huevos.",
+                      "Escalfar tapado.",
+                      "Servir con pan."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "45",
+        "title":  "Nasi Goreng",
+        "description":  "Arroz frito indonesio con huevo y gambas.",
+        "category":  "Cena",
+        "calories":  470,
+        "image_url":  "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Arroz",
+                            "Kecap manis",
+                            "Gambas",
+                            "Huevo",
+                            "Chiles"
+                        ],
+        "steps":  [
+                      "Saltear gambas.",
+                      "Añadir arroz y salsa.",
+                      "Poner huevo encima.",
+                      "Servir."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "46",
+        "title":  "Fish and Chips",
+        "description":  "Pescado rebozado britanico con patatas.",
+        "category":  "Almuerzo",
+        "calories":  680,
+        "image_url":  "https://images.unsplash.com/photo-1524339102455-67497ecad500?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Bacalao",
+                            "Cerveza",
+                            "Harina",
+                            "Patatas",
+                            "Guisantes"
+                        ],
+        "steps":  [
+                      "Hacer tempura.",
+                      "Rebozar pescado.",
+                      "Freir todo.",
+                      "Servir caliente."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "47",
+        "title":  "Chili con Carne",
+        "description":  "Guiso tex-mex de carne y frijoles.",
+        "category":  "Almuerzo",
+        "calories":  540,
+        "image_url":  "https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Carne",
+                            "Frijoles",
+                            "Tomate",
+                            "Chili",
+                            "Comino"
+                        ],
+        "steps":  [
+                      "Sofreir carne.",
+                      "Añadir tomate y chili.",
+                      "Poner frijoles.",
+                      "Cocer lento."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "48",
+        "title":  "Panna Cotta",
+        "description":  "Flan italiano de nata y vainilla.",
+        "category":  "Postre",
+        "calories":  260,
+        "image_url":  "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Nata",
+                            "Gelatina",
+                            "Vainilla",
+                            "Azucar",
+                            "Frambuesas"
+                        ],
+        "steps":  [
+                      "Calentar nata.",
+                      "Añadir gelatina.",
+                      "Enmoldar.",
+                      "Enfriar y decorar."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "49",
+        "title":  "Ravioli de Ricotta",
+        "description":  "Pasta rellena de queso y espinacas.",
+        "category":  "Cena",
+        "calories":  390,
+        "image_url":  "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Pasta fresca",
+                            "Ricotta",
+                            "Espinacas",
+                            "Salvia",
+                            "Mantequilla"
+                        ],
+        "steps":  [
+                      "Hacer relleno.",
+                      "Rellenar ravioli.",
+                      "Cocer pasta.",
+                      "Aliñar mantequilla."
+                  ],
+        "is_public":  true
+    },
+    {
+        "id":  "50",
+        "title":  "Crema Catalana",
+        "description":  "Postre de crema con azucar quemado.",
+        "category":  "Postre",
+        "calories":  310,
+        "image_url":  "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "ingredients":  [
+                            "Leche",
+                            "Yemas",
+                            "Azucar",
+                            "Maizena",
+                            "Canela"
+                        ],
+        "steps":  [
+                      "Cocer crema.",
+                      "Dejar enfriar.",
+                      "Poner azucar.",
+                      "Quemar."
+                  ],
+        "is_public":  true
+    }
 ]
