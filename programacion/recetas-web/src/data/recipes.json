@@ -53,5 +53,60 @@
     "ingredients": ["Filete de salmÃ³n", "Romero fresco", "LimÃ³n", "Aceite de oliva", "Pimienta negra"],
     "steps": ["Precalentar el horno a 200Â°C.", "Colocar el salmÃ³n en una bandeja.", "Sazonar con hierbas, limÃ³n y aceite.", "Hornear por 15-18 minutos."],
     "is_public": true
+  },
+  {
+    "id": "6",
+    "title": "Sopa de Tomate Rostizado",
+    "description": "Reconfortante y llena de sabor, perfecta para el invierno.",
+    "category": "Almuerzo",
+    "calories": 250,
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["Tomates maduros", "Ajo", "Cebolla", "Caldo de verduras", "Albahaca"],
+    "steps": ["Rostizar tomates, ajo y cebolla.", "Licuar con el caldo.", "Cocinar a fuego lento.", "Decorar con albahaca fresca."],
+    "is_public": true
+  },
+  {
+    "id": "7",
+    "title": "Smoothie Bowl de AcaÃ­",
+    "description": "EnergÃ­a pura en un tazÃ³n con frutas y semillas.",
+    "category": "Desayuno",
+    "calories": 350,
+    "image_url": "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["AcaÃ­ en polvo", "PlÃ¡tano congelado", "Leche de almendras", "Granola", "Frutos rojos"],
+    "steps": ["Licuar acaÃ­, plÃ¡tano y leche.", "Servir en un bol.", "Decorar con granola y frutas.", "Disfrutar de inmediato."],
+    "is_public": true
+  },
+  {
+    "id": "8",
+    "title": "Pollo al Curry con Coco",
+    "description": "Un viaje de sabores asiÃ¡ticos en un solo plato.",
+    "category": "Almuerzo",
+    "calories": 600,
+    "image_url": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["Pechuga de pollo", "Leche de coco", "Curry en polvo", "Jengibre", "Arroz basmati"],
+    "steps": ["Saltear el pollo con jengibre.", "Agregar leche de coco y curry.", "Cocinar hasta espesar.", "Servir sobre arroz basmati."],
+    "is_public": true
+  },
+  {
+    "id": "9",
+    "title": "Pizza Margarita Artesanal",
+    "description": "Masa delgada, tomate, mozzarella fresca y albahaca.",
+    "category": "Cena",
+    "calories": 700,
+    "image_url": "https://images.unsplash.com/photo-1574071318508-1cdbad80ad38?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["Harina 00", "Levadura", "Tomate triturado", "Mozzarella", "Albahaca"],
+    "steps": ["Preparar y fermentar la masa.", "Extender y cubrir con tomate y queso.", "Hornear a alta temperatura.", "AÃ±adir albahaca fresca al salir."],
+    "is_public": true
+  },
+  {
+    "id": "10",
+    "title": "Hummus ClÃ¡sico",
+    "description": "El dip perfecto de garbanzos, tahini y limÃ³n.",
+    "category": "Entrante",
+    "calories": 180,
+    "image_url": "https://images.unsplash.com/photo-1585937421612-71a008356fbe?auto=format&fit=crop&w=800&q=80",
+    "ingredients": ["Garbanzos cocidos", "Tahini", "LimÃ³n", "Ajo", "Paprika"],
+    "steps": ["Procesar garbanzos, tahini, ajo y limÃ³n.", "Ajustar consistencia con agua.", "Servir con un chorrito de aceite.", "Espolvorear paprika."],
+    "is_public": true
   }
 ]
