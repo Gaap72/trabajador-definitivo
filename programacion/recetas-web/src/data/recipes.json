@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "title": "Pasta Pesto",
+    "description": "Classic Italian recipe, fast and delicious.",
+    "category": "Almuerzo",
+    "calories": 450,
+    "ingredients": ["Pasta", "Basil", "Pine nuts", "Olive Oil", "Garlic", "Parmesan"],
+    "steps": ["Boil pasta", "Blend basil, garlic and nuts", "Mix with oil and cheese", "Toss with pasta"],
+    "is_public": true
+  },
+  {
+    "id": "2",
+    "title": "Quinoa Salad",
+    "description": "Fresh and nutritious for a light dinner.",
+    "category": "Cena",
+    "calories": 320,
+    "ingredients": ["Quinoa", "Avocado", "Tomato", "Cucumber", "Lemon"],
+    "steps": ["Cook quinoa", "Chop vegetables", "Mix in a bowl", "Dress with lemon and salt"],
+    "is_public": true
+  }
+]
