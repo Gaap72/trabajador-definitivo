@@ -7,7 +7,7 @@ import {
   Settings, User, ShieldCheck, LogOut, 
   ChevronLeft, Loader2, CheckCircle2, AlertCircle,
   BookOpen, GraduationCap, Users, DoorOpen, Save,
-  ArrowRight, Shield, HeartHandshake
+  ArrowRight, Shield, HeartHandshake, Clock
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -27,7 +27,8 @@ export default function SettingsPage() {
     grado: '',
     grupo: '',
     salon: '',
-    tutor: ''
+    tutor: '',
+    turno: ''
   })
   
   const supabase = createClient()
@@ -55,7 +56,8 @@ export default function SettingsPage() {
         grado: data.grado || '',
         grupo: data.grupo || '',
         salon: data.salon || '',
-        tutor: data.tutor || ''
+        tutor: data.tutor || '',
+        turno: data.turno || ''
       })
     }
     setLoading(false)
@@ -64,19 +66,39 @@ export default function SettingsPage() {
   const handleSaveInfo = async (e: React.FormEvent) => {
     e.preventDefault()
     setUpdating(true)
-    const { error } = await supabase
-      .from('profiles')
-      .update(formData)
-      .eq('id', profile.id)
+    setMessage({ type: '', text: '' })
 
-    if (error) {
-      setMessage({ type: 'error', text: 'Error al guardar información' })
-    } else {
-      setMessage({ type: 'success', text: '¡Información actualizada!' })
-      setShowReturnBtn(true)
-      setTimeout(() => setMessage({ type: '', text: '' }), 4000)
+    const fieldsToUpdate = {
+      full_name: formData.full_name,
+      materia: formData.materia,
+      grado: formData.grado,
+      grupo: formData.grupo,
+      salon: formData.salon,
+      tutor: formData.tutor,
+      turno: formData.turno
     }
-    setUpdating(false)
+
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update(fieldsToUpdate)
+        .eq('id', profile.id)
+
+      if (error) throw error
+
+      setProfile((prev: any) => ({ ...prev, ...fieldsToUpdate }))
+      setMessage({ type: 'success', text: '¡Perfil actualizado con éxito!' })
+      setShowReturnBtn(true)
+      
+      // Auto-ocultar mensaje pero mantener el botón de retorno
+      setTimeout(() => setMessage({ type: '', text: '' }), 4000)
+
+    } catch (err: any) {
+      console.error("Error al guardar:", err.message)
+      setMessage({ type: 'error', text: 'Error al conectar con el servidor' })
+    } finally {
+      setUpdating(false)
+    }
   }
 
   const handleUpdateRole = async () => {
@@ -180,6 +202,22 @@ export default function SettingsPage() {
                    <div className="relative">
                       <DoorOpen className="absolute left-5 top-5 h-5 w-5 text-slate-300" />
                       <input type="text" value={formData.salon} onChange={(e) => setFormData({...formData, salon: e.target.value})} className="w-full bg-slate-50 border-none rounded-2xl py-5 pl-14 pr-6 font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Salón..." />
+                   </div>
+                </div>
+
+                <div className="space-y-2">
+                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Turno</label>
+                   <div className="relative">
+                      <Clock className="absolute left-5 top-5 h-5 w-5 text-slate-300" />
+                      <select 
+                        value={formData.turno} 
+                        onChange={(e) => setFormData({...formData, turno: e.target.value})} 
+                        className="w-full bg-slate-50 border-none rounded-2xl py-5 pl-14 pr-6 font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none appearance-none"
+                      >
+                        <option value="">Seleccionar turno...</option>
+                        <option value="MATUTINO">MATUTINO</option>
+                        <option value="VESPERTINO">VESPERTINO</option>
+                      </select>
                    </div>
                 </div>
 

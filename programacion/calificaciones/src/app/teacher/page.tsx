@@ -27,6 +27,13 @@ interface Student {
   last_sync_time?: number;
 }
 
+const toLocalDateString = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 export default function TeacherPage() {
   const [activeTab, setActiveTab] = useState<'grades' | 'attendance'>('grades')
   const [students, setStudents] = useState<Student[]>([])
@@ -38,9 +45,10 @@ export default function TeacherPage() {
   const [isSyncing, setIsSyncing] = useState(false)
 
   // Gestión de Asistencia
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0])
+  const [selectedDate, setSelectedDate] = useState(toLocalDateString(new Date()))
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [attendanceMap, setAttendanceMap] = useState<Record<string, 'PRESENT' | 'ABSENT'>>({})
+  const [markedDays, setMarkedDays] = useState<Set<string>>(new Set())
   const [changedAttendance, setChangedAttendance] = useState<Set<string>>(new Set())
   
   // Justificación
@@ -91,8 +99,26 @@ export default function TeacherPage() {
   useEffect(() => {
     if (activeTab === 'attendance') {
       fetchAttendanceByDate()
+      fetchMarkedDays()
     }
-  }, [selectedDate, activeTab])
+  }, [selectedDate, currentMonth, activeTab])
+
+  async function fetchMarkedDays() {
+    const year = currentMonth.getFullYear()
+    const month = currentMonth.getMonth() + 1
+    const startDate = `${year}-${String(month).padStart(2, '0')}-01`
+    const endDate = `${year}-${String(month).padStart(2, '0')}-31`
+
+    const { data } = await supabase
+      .from('attendance')
+      .select('date')
+      .gte('date', startDate)
+      .lte('date', endDate)
+    
+    const days = new Set<string>()
+    data?.forEach(r => days.add(r.date))
+    setMarkedDays(days)
+  }
 
   async function fetchData() {
     const localCacheRaw = localStorage.getItem('edupro_full_students_cache')
@@ -371,19 +397,50 @@ export default function TeacherPage() {
                      <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))} className="p-3 text-white"><ChevronRight className="h-4 w-4" /></button>
                   </div>
                </div>
-               <div className="grid grid-cols-7 gap-4">
-                  {['DOM', 'LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB'].map(d => <div key={d} className="text-center text-[10px] font-black text-slate-300 py-2">{d}</div>)}
-                  {getDaysInMonth().map((date, i) => {
-                    if (!date) return <div key={i}></div>
-                    const dateStr = date.toISOString().split('T')[0]
-                    const isSelected = selectedDate === dateStr
-                    return (
-                      <button key={i} onClick={() => setSelectedDate(dateStr)} className={`aspect-square rounded-2xl border-4 transition-all flex items-center justify-center ${isSelected ? 'bg-indigo-600 border-indigo-100 text-white shadow-xl scale-105' : 'bg-slate-50 border-transparent text-slate-400 hover:border-slate-200'}`}>
-                         <span className="text-xl font-black">{date.getDate()}</span>
-                      </button>
-                    )
-                  })}
-               </div>
+                  <div className="grid grid-cols-7 gap-4">
+                     {['DOM', 'LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB'].map(d => <div key={d} className="text-center text-[10px] font-black text-slate-300 py-2">{d}</div>)}
+                     
+                     {/* Espacios en blanco para el inicio del mes */}
+                     {Array.from({ length: new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay() }).map((_, i) => (
+                       <div key={`empty-${i}`} className="aspect-square"></div>
+                     ))}
+
+                     {getDaysInMonth().map((date, i) => {
+                       if (!date) return <div key={i}></div>
+                       const dateStr = date.toISOString().split('T')[0]
+                       const isSelected = selectedDate === dateStr
+                       const hasData = markedDays.has(dateStr)
+
+                       return (
+                         <button 
+                           key={i} 
+                           onClick={() => setSelectedDate(dateStr)} 
+                           className={`aspect-square rounded-2xl border-4 transition-all flex flex-col items-center justify-center relative ${
+                             isSelected 
+                               ? 'bg-indigo-600 border-indigo-100 text-white shadow-xl scale-105 z-10' 
+                               : hasData
+                                 ? 'bg-white border-indigo-400 text-indigo-600 shadow-sm'
+                                 : 'bg-slate-50 border-transparent text-slate-400 hover:border-slate-200'
+                           }`}
+                         >
+                            <span className="text-xl font-black">{date.getDate()}</span>
+                            {hasData && !isSelected && (
+                              <div className="absolute top-2 right-2 h-2 w-2 bg-indigo-500 rounded-full animate-pulse"></div>
+                            )}
+                         </button>
+                       )
+                     })}
+                  </div>
+                  <div className="mt-6 flex justify-center gap-6">
+                     <div className="flex items-center gap-2">
+                        <div className="h-3 w-3 rounded-full bg-indigo-500"></div>
+                        <span className="text-[10px] font-black text-slate-400 uppercase">Día con registros</span>
+                     </div>
+                     <div className="flex items-center gap-2">
+                        <div className="h-3 w-3 rounded-full bg-slate-200"></div>
+                        <span className="text-[10px] font-black text-slate-400 uppercase">Sin registros</span>
+                     </div>
+                  </div>
             </section>
           )}
 
