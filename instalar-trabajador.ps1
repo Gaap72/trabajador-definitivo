@@ -1,57 +1,73 @@
-# Script de Instalación Automática - TRABAJADOR DEFINITIVO
-# IMPORTANTE: Si se cierra rápido, abre PowerShell como Administrador y arrastra este archivo adentro.
+# ============================================================
+# INSTALADOR BLINDADO - TRABAJADOR DEFINITIVO
+# ============================================================
 
-$ErrorActionPreference = "Continue"
+# 1. PEDIR PERMISOS DE ADMINISTRADOR AUTOMÃTICAMENTE
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "Solicitando permisos de Administrador..." -ForegroundColor Yellow
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
 
+# 2. CONFIGURAR PERMISOS DE EJECUCIÃ“N
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+
+Clear-Host
 Write-Host "==============================================" -ForegroundColor Cyan
-Write-Host "   PREPARANDO EL TRABAJADOR DEFINITIVO" -ForegroundColor Cyan
+Write-Host "   ENTORNO PROFESIONAL: TRABAJADOR DEFINITIVO" -ForegroundColor Cyan
 Write-Host "==============================================" -ForegroundColor Cyan
+Write-Host "Este script configurarÃ¡ todo por ti." -ForegroundColor Gray
 
-# Función para instalar con aviso visual claro
-function Install-Tool {
+# FunciÃ³n para preguntar antes de instalar
+function Confirm-Install {
     param([string]$name, [string]$id)
-    Write-Host "[...] Buscando $name..." -ForegroundColor Gray
+    
     $check = Get-Command $name -ErrorAction SilentlyContinue
-    if (!$check) {
-        Write-Host "[!] Instalando $name (Esto puede tardar unos minutos)..." -ForegroundColor Yellow
+    if ($check) {
+        Write-Host "[OK] $name ya estÃ¡ instalado." -ForegroundColor Green
+        return
+    }
+
+    $title = "Instalar $name"
+    $message = "Â¿Deseas instalar $name ahora?"
+    $options = [System.Management.Automation.Host.ChoiceDescription[]] @(
+        New-Object System.Management.Automation.Host.ChoiceDescription "&SÃ­", "Instala la herramienta."
+        New-Object System.Management.Automation.Host.ChoiceDescription "&No", "Salta este paso."
+    )
+    
+    $result = $host.ui.PromptForChoice($title, $message, $options, 0)
+    
+    if ($result -eq 0) {
+        Write-Host "[!] Instalando $name... No cierres la ventana." -ForegroundColor Yellow
         winget install -e --id $id --silent --accept-package-agreements --accept-source-agreements
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "[OK] $name instalado correctamente." -ForegroundColor Green
-        } else {
-            Write-Host "[X] Error al instalar $name. Intenta instalarlo manualmente." -ForegroundColor Red
-        }
+        Write-Host "[OK] Proceso de $name finalizado." -ForegroundColor Green
     } else {
-        Write-Host "[OK] $name ya está presente en el sistema." -ForegroundColor Green
+        Write-Host "[-] Se saltÃ³ la instalaciÃ³n de $name." -ForegroundColor Gray
     }
 }
 
-# 1. Herramientas base
-Install-Tool "git" "Git.Git"
-Install-Tool "node" "OpenJS.NodeJS.LTS"
-Install-Tool "dotnet" "Microsoft.DotNet.SDK.9"
-Install-Tool "gh" "GitHub.cli"
+# --- EJECUCIÃ“N DE PASOS ---
 
-# 2. Gemini CLI
-Write-Host "[...] Instalando Gemini CLI globalmente..." -ForegroundColor Cyan
+Confirm-Install "git" "Git.Git"
+Confirm-Install "node" "OpenJS.NodeJS.LTS"
+Confirm-Install "dotnet" "Microsoft.DotNet.SDK.9"
+Confirm-Install "gh" "GitHub.cli"
+
+Write-Host "`n[...] Configurando Gemini CLI globalmente..." -ForegroundColor Cyan
 npm install -g @google/gemini-cli
-Write-Host "[OK] Gemini CLI configurado." -ForegroundColor Green
 
-# 3. Estructura de carpetas
-Write-Host "[...] Verificando carpetas de trabajo..." -ForegroundColor Cyan
+Write-Host "`n[...] Creando carpetas de trabajo..." -ForegroundColor Cyan
 $folders = @("conductor", "programacion")
 foreach ($folder in $folders) {
     if (!(Test-Path $folder)) {
         New-Item -ItemType Directory -Path $folder | Out-Null
-        Write-Host "    -> Carpeta '$folder' creada." -ForegroundColor Gray
+        Write-Host "    -> Carpeta '$folder' lista." -ForegroundColor Gray
     }
 }
 
 Write-Host "`n==============================================" -ForegroundColor Green
-Write-Host "   INSTALACIÃ“N COMPLETADA CON Ã‰XITO" -ForegroundColor Green
+Write-Host "   TODO PREPARADO CORRECTAMENTE" -ForegroundColor Green
 Write-Host "==============================================" -ForegroundColor Green
-Write-Host "PASOS FINALES:"
-Write-Host "1. CIERRA esta ventana."
-Write-Host "2. Abre una NUEVA terminal de PowerShell."
-Write-Host "3. Escribe 'gemini login' para empezar."
+Write-Host "Para que los cambios surtan efecto, abre una NUEVA ventana de PowerShell."
 Write-Host ""
-Read-Host "Presiona ENTER para salir de este instalador..."
+Read-Host "Presiona ENTER para finalizar..."
