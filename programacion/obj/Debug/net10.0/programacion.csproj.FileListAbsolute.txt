@@ -1,0 +1,5 @@
+c:\Users\Genaro Aurelio\programacion\obj\Debug\net10.0\programacion.csproj.AssemblyReference.cache
+c:\Users\Genaro Aurelio\programacion\obj\Debug\net10.0\programacion.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\Genaro Aurelio\programacion\obj\Debug\net10.0\programacion.AssemblyInfoInputs.cache
+c:\Users\Genaro Aurelio\programacion\obj\Debug\net10.0\programacion.AssemblyInfo.cs
+c:\Users\Genaro Aurelio\programacion\obj\Debug\net10.0\programacion.csproj.CoreCompileInputs.cache

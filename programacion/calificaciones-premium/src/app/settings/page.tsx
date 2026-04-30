@@ -1,0 +1,271 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { createClient } from '@/utils/supabase/client'
+import { useRouter } from 'next/navigation'
+import { 
+  Settings, User, ShieldCheck, LogOut, 
+  ChevronLeft, Loader2, CheckCircle2, AlertCircle,
+  BookOpen, GraduationCap, Users, DoorOpen, Save,
+  ArrowRight, Shield, HeartHandshake, Clock
+} from 'lucide-react'
+import Link from 'next/link'
+
+const PROFESSOR_CODE = 'PROFESOR2026'
+
+export default function SettingsPage() {
+  const [profile, setProfile] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [code, setCode] = useState('')
+  const [updating, setUpdating] = useState(false)
+  const [message, setMessage] = useState({ type: '', text: '' })
+  const [showReturnBtn, setShowReturnBtn] = useState(false)
+  
+  const [formData, setFormData] = useState({
+    full_name: '',
+    materia: '',
+    grado: '',
+    grupo: '',
+    salon: '',
+    tutor: '',
+    turno: ''
+  })
+  
+  const supabase = createClient()
+  const router = useRouter()
+
+  useEffect(() => {
+    fetchProfile()
+  }, [])
+
+  async function fetchProfile() {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return router.push('/login')
+
+    const { data } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single()
+    
+    setProfile(data)
+    if (data) {
+      setFormData({
+        full_name: data.full_name || '',
+        materia: data.materia || '',
+        grado: data.grado || '',
+        grupo: data.grupo || '',
+        salon: data.salon || '',
+        tutor: data.tutor || '',
+        turno: data.turno || ''
+      })
+    }
+    setLoading(false)
+  }
+
+  const handleSaveInfo = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setUpdating(true)
+    setMessage({ type: '', text: '' })
+
+    const fieldsToUpdate = {
+      full_name: formData.full_name,
+      materia: formData.materia,
+      grado: formData.grado,
+      grupo: formData.grupo,
+      salon: formData.salon,
+      tutor: formData.tutor,
+      turno: formData.turno
+    }
+
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update(fieldsToUpdate)
+        .eq('id', profile.id)
+
+      if (error) throw error
+
+      setProfile((prev: any) => ({ ...prev, ...fieldsToUpdate }))
+      setMessage({ type: 'success', text: '¡Perfil actualizado con éxito!' })
+      setShowReturnBtn(true)
+      
+      // Auto-ocultar mensaje pero mantener el botón de retorno
+      setTimeout(() => setMessage({ type: '', text: '' }), 4000)
+
+    } catch (err: any) {
+      console.error("Error al guardar:", err.message)
+      setMessage({ type: 'error', text: 'Error al conectar con el servidor' })
+    } finally {
+      setUpdating(false)
+    }
+  }
+
+  const handleUpdateRole = async () => {
+    if (code !== PROFESSOR_CODE) {
+      setMessage({ type: 'error', text: 'Código de profesor incorrecto' })
+      return
+    }
+    setUpdating(true)
+    const { error } = await supabase.from('profiles').update({ role: 'TEACHER' }).eq('id', profile.id)
+    if (!error) router.push('/teacher')
+    setUpdating(false)
+  }
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    router.push('/login')
+  }
+
+  if (loading) return <div className="min-h-screen flex items-center justify-center bg-zinc-900 border border-zinc-800"><Loader2 className="animate-spin h-10 w-10 text-cyan-400" /></div>
+
+  return (
+    <div className="min-h-screen bg-zinc-900 border border-zinc-800 pb-20 font-mono uppercase tracking-widest">
+      <nav className="bg-zinc-950/90 border-b border-cyan-900 backdrop-blur-md border-b sticky top-0 z-50">
+        <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-zinc-500 hover:text-cyan-400 font-black transition-all">
+            <ChevronLeft className="h-5 w-5" /> VOLVER
+          </Link>
+          <h1 className="text-xl font-black text-cyan-50 uppercase tracking-[0.2em]er">Ajustes de Perfil</h1>
+          <div className="flex items-center gap-2 bg-lime-50 text-lime-600 px-4 py-2 rounded-none text-[10px] font-black border border-lime-100">
+             <Shield className="h-3 w-3" /> GITHUB VERIFICADO
+          </div>
+        </div>
+      </nav>
+
+      <main className="max-w-4xl mx-auto px-6 pt-12">
+        <div className="space-y-10">
+          
+          <section className="bg-zinc-950 border border-cyan-900/50 p-10 rounded-none shadow-none border border-cyan-900/30 relative overflow-hidden">
+            <div className="flex items-center gap-8 relative z-10">
+              <div className="h-24 w-24 bg-cyan-500 text-black rounded-none flex items-center justify-center text-4xl font-black text-white shadow-[0_0_20px_rgba(6,182,212,0.2)] shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                {profile?.full_name?.charAt(0) || 'U'}
+              </div>
+              <div>
+                <span className="bg-cyan-950 text-cyan-400 px-3 py-1 rounded-none text-[10px] font-black uppercase tracking-widest mb-2 inline-block">
+                   {profile?.role === 'TEACHER' ? 'Maestro Titular' : 'Estudiante'}
+                </span>
+                <h2 className="text-3xl font-black text-cyan-50">{profile?.full_name || 'Sin Nombre'}</h2>
+                <p className="text-zinc-500 font-bold text-lg">Sesión: {profile?.github_username}</p>
+              </div>
+            </div>
+          </section>
+
+          {/* FORMULARIO UNIFICADO (PROFESOR O ALUMNO) */}
+          <section className="bg-zinc-950 border border-cyan-900/50 p-10 rounded-none shadow-none border border-cyan-900/30">
+             <div className="flex items-center justify-between mb-10">
+                <div className="flex items-center gap-4">
+                   <div className="bg-cyan-950 p-3 rounded-none text-cyan-400"><User className="h-6 w-6" /></div>
+                   <h3 className="text-2xl font-black text-cyan-50 tracking-[0.2em]">Información Personal</h3>
+                </div>
+                {showReturnBtn && (
+                  <Link href={profile?.role === 'TEACHER' ? '/teacher' : '/student'} className="flex items-center gap-2 bg-cyan-500 text-black text-white px-6 py-3 rounded-none font-black text-xs hover:bg-cyan-600 text-black transition-all shadow-lg animate-bounce">
+                     IR AL PANEL <ArrowRight className="h-4 w-4" />
+                  </Link>
+                )}
+             </div>
+
+             <form onSubmit={handleSaveInfo} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2 md:col-span-2">
+                   <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Nombre Completo</label>
+                   <input type="text" value={formData.full_name} onChange={(e) => setFormData({...formData, full_name: e.target.value})} className="w-full bg-zinc-900 border border-zinc-800 border-none rounded-none py-5 px-6 font-bold text-zinc-300 focus:ring-2 focus:ring-rose-500 outline-none" placeholder="Escribe tu nombre..." />
+                </div>
+                
+                {profile?.role === 'TEACHER' && (
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Materia Impartida</label>
+                    <div className="relative">
+                      <BookOpen className="absolute left-5 top-5 h-5 w-5 text-zinc-600" />
+                      <input type="text" value={formData.materia} onChange={(e) => setFormData({...formData, materia: e.target.value})} className="w-full bg-zinc-900 border border-zinc-800 border-none rounded-none py-5 pl-14 pr-6 font-bold text-zinc-300 focus:ring-2 focus:ring-rose-500 outline-none" placeholder="Materia..." />
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                   <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Grado</label>
+                   <div className="relative">
+                      <GraduationCap className="absolute left-5 top-5 h-5 w-5 text-zinc-600" />
+                      <input type="text" value={formData.grado} onChange={(e) => setFormData({...formData, grado: e.target.value})} className="w-full bg-zinc-900 border border-zinc-800 border-none rounded-none py-5 pl-14 pr-6 font-bold text-zinc-300 focus:ring-2 focus:ring-rose-500 outline-none" placeholder="Grado..." />
+                   </div>
+                </div>
+
+                <div className="space-y-2">
+                   <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Grupo</label>
+                   <div className="relative">
+                      <Users className="absolute left-5 top-5 h-5 w-5 text-zinc-600" />
+                      <input type="text" value={formData.grupo} onChange={(e) => setFormData({...formData, grupo: e.target.value})} className="w-full bg-zinc-900 border border-zinc-800 border-none rounded-none py-5 pl-14 pr-6 font-bold text-zinc-300 focus:ring-2 focus:ring-rose-500 outline-none" placeholder="Grupo..." />
+                   </div>
+                </div>
+
+                <div className="space-y-2">
+                   <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Salón / Aula</label>
+                   <div className="relative">
+                      <DoorOpen className="absolute left-5 top-5 h-5 w-5 text-zinc-600" />
+                      <input type="text" value={formData.salon} onChange={(e) => setFormData({...formData, salon: e.target.value})} className="w-full bg-zinc-900 border border-zinc-800 border-none rounded-none py-5 pl-14 pr-6 font-bold text-zinc-300 focus:ring-2 focus:ring-rose-500 outline-none" placeholder="Salón..." />
+                   </div>
+                </div>
+
+                <div className="space-y-2">
+                   <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Turno</label>
+                   <div className="relative">
+                      <Clock className="absolute left-5 top-5 h-5 w-5 text-zinc-600" />
+                      <select 
+                        value={formData.turno} 
+                        onChange={(e) => setFormData({...formData, turno: e.target.value})} 
+                        className="w-full bg-zinc-900 border border-zinc-800 border-none rounded-none py-5 pl-14 pr-6 font-bold text-zinc-300 focus:ring-2 focus:ring-rose-500 outline-none appearance-none"
+                      >
+                        <option value="">Seleccionar turno...</option>
+                        <option value="MATUTINO">MATUTINO</option>
+                        <option value="VESPERTINO">VESPERTINO</option>
+                      </select>
+                   </div>
+                </div>
+
+                {profile?.role === 'STUDENT' && (
+                  <div className="space-y-2 md:col-span-2">
+                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Padre de Familia o Tutor</label>
+                    <div className="relative">
+                       <HeartHandshake className="absolute left-5 top-5 h-5 w-5 text-zinc-600" />
+                       <input type="text" value={formData.tutor} onChange={(e) => setFormData({...formData, tutor: e.target.value})} className="w-full bg-zinc-900 border border-zinc-800 border-none rounded-none py-5 pl-14 pr-6 font-bold text-zinc-300 focus:ring-2 focus:ring-rose-500 outline-none" placeholder="Nombre del tutor responsable..." />
+                    </div>
+                  </div>
+                )}
+
+                <div className="md:col-span-2 pt-6">
+                  <button type="submit" disabled={updating} className="w-full bg-cyan-500 text-black text-white py-5 rounded-none font-black hover:bg-cyan-600 text-black transition-all shadow-[0_0_10px_rgba(6,182,212,0.1)] shadow-[0_0_15px_rgba(6,182,212,0.3)] flex items-center justify-center gap-3">
+                    {updating ? <Loader2 className="animate-spin h-6 w-6" /> : <Save className="h-6 w-6" />}
+                    GUARDAR INFORMACIÓN
+                  </button>
+                </div>
+             </form>
+          </section>
+
+          {profile?.role !== 'TEACHER' && (
+            <section className="bg-zinc-950 border border-cyan-900/50 p-10 rounded-none shadow-none border border-cyan-900/30">
+              <h3 className="text-2xl font-black text-cyan-50 mb-6">Ascender a Maestro</h3>
+              <div className="flex gap-4">
+                <input type="password" value={code} onChange={(e) => setCode(e.target.value)} placeholder="Código secreto..." className="flex-1 bg-zinc-900 border border-zinc-800 border-none rounded-none p-5 font-bold outline-none focus:ring-2 focus:ring-orange-500" />
+                <button onClick={handleUpdateRole} className="bg-orange-600 text-white px-8 rounded-none font-black">VERIFICAR</button>
+              </div>
+            </section>
+          )}
+
+          <button onClick={handleLogout} className="w-full bg-red-50 hover:bg-red-100 p-8 rounded-none flex items-center justify-between transition-all">
+            <div className="flex items-center gap-4">
+              <div className="bg-red-500 p-3 rounded-none shadow-lg"><LogOut className="text-white h-5 w-5" /></div>
+              <span className="font-black text-red-600 uppercase tracking-widest">Cerrar Sesión</span>
+            </div>
+            <ChevronLeft className="h-6 w-6 text-red-300 rotate-180" />
+          </button>
+        </div>
+      </main>
+
+      {message.text && (
+        <div className={`fixed bottom-10 left-1/2 -translate-x-1/2 p-5 rounded-none shadow-[0_0_20px_rgba(6,182,212,0.2)] flex items-center gap-3 font-black text-sm z-[100] ${message.type === 'success' ? 'bg-cyan-500 text-black text-white' : 'bg-red-600 text-white'}`}>
+          {message.type === 'success' ? <CheckCircle2 className="h-5 w-5" /> : <AlertCircle className="h-5 w-5" />}
+          {message.text.toUpperCase()}
+        </div>
+      )}
+    </div>
+  )
+}

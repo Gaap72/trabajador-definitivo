@@ -27,6 +27,8 @@ interface Student {
   last_sync_time?: number;
 }
 
+const PROFESSOR_CODE = 'PROFESOR2026';
+
 const toLocalDateString = (date: Date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -35,6 +37,8 @@ const toLocalDateString = (date: Date) => {
 };
 
 export default function TeacherPage() {
+  const [isAuthorized, setIsAuthorized] = useState(false)
+  const [authCode, setAuthCode] = useState('')
   const [activeTab, setActiveTab] = useState<'grades' | 'attendance'>('grades')
   const [students, setStudents] = useState<Student[]>([])
   const [loading, setLoading] = useState(true)
@@ -57,10 +61,17 @@ export default function TeacherPage() {
 
   const supabase = createClient()
   const router = useRouter()
+
+  const handleVerifyIdentity = () => {
+    if (authCode === PROFESSOR_CODE) {
+      setIsAuthorized(true)
+    } else {
+      alert("❌ Código de identidad incorrecto")
+    }
+  }
   
   // 1. CARGA INSTANTÁNEA (HIDRATACIÓN LOCAL AL INICIO)
   useEffect(() => {
-    // Leemos inmediatamente del disco local para que el profesor vea sus datos SIN ESPERAR
     const localData = localStorage.getItem('edupro_full_students_cache')
     const localPending = localStorage.getItem('edupro_grades_backup')
     
@@ -68,15 +79,13 @@ export default function TeacherPage() {
       setStudents(JSON.parse(localData))
       setLoading(false)
     }
-
     if (localPending) {
       setPendingGrades(JSON.parse(localPending))
     }
-
     fetchData()
   }, [])
 
-  // 2. PERSISTENCIA LOCAL (CADA CAMBIO SE ESCRIBE EN DISCO DE INMEDIATO)
+  // 2. PERSISTENCIA LOCAL
   useEffect(() => {
     if (students.length > 0) {
       localStorage.setItem('edupro_full_students_cache', JSON.stringify(students))
@@ -86,7 +95,6 @@ export default function TeacherPage() {
   useEffect(() => {
     if (Object.keys(pendingGrades).length > 0) {
       localStorage.setItem('edupro_grades_backup', JSON.stringify(pendingGrades))
-      
       const timer = setTimeout(() => {
         syncGradesWithCloud()
       }, 5000)
@@ -108,13 +116,7 @@ export default function TeacherPage() {
     const month = currentMonth.getMonth() + 1
     const startDate = `${year}-${String(month).padStart(2, '0')}-01`
     const endDate = `${year}-${String(month).padStart(2, '0')}-31`
-
-    const { data } = await supabase
-      .from('attendance')
-      .select('date')
-      .gte('date', startDate)
-      .lte('date', endDate)
-    
+    const { data } = await supabase.from('attendance').select('date').gte('date', startDate).lte('date', endDate)
     const days = new Set<string>()
     data?.forEach(r => days.add(r.date))
     setMarkedDays(days)
@@ -123,7 +125,6 @@ export default function TeacherPage() {
   async function fetchData() {
     const localCacheRaw = localStorage.getItem('edupro_full_students_cache')
     const localCache = localCacheRaw ? JSON.parse(localCacheRaw) : []
-    
     if (localCache.length > 0 && students.length === 0) {
       setStudents(localCache)
       setLoading(false)
@@ -133,24 +134,11 @@ export default function TeacherPage() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return router.push('/login')
 
-      // Consulta base segura (sin director_grade por si acaso no existe aún)
-      const { data: profiles, error: pError } = await supabase
-        .from('profiles')
-        .select(`
-          id, github_username, full_name,
-          grades (id, block_1, block_2, block_3, updated_at)
-        `)
-        .eq('role', 'STUDENT')
-
+      const { data: profiles, error: pError } = await supabase.from('profiles').select('id, github_username, full_name, grades (id, block_1, block_2, block_3, updated_at)').eq('role', 'STUDENT')
       if (pError) console.error("Error cargando perfiles:", pError)
 
-      // Intentar cargar director_grade de forma aislada
       const { data: dGrades } = await supabase.from('grades').select('student_id, director_grade')
-
-      const { data: attendance } = await supabase
-        .from('attendance')
-        .select('student_id, status')
-        .eq('status', 'ABSENT')
+      const { data: attendance } = await supabase.from('attendance').select('student_id, status').eq('status', 'ABSENT')
 
       const backupRaw = localStorage.getItem('edupro_grades_backup')
       const backup = backupRaw ? JSON.parse(backupRaw) : {}
@@ -180,7 +168,6 @@ export default function TeacherPage() {
           last_sync_time: isLocalNewer ? localTime : dbTime
         }
       })
-
       setStudents(formatted)
       localStorage.setItem('edupro_full_students_cache', JSON.stringify(formatted))
     } catch (err) {
@@ -191,11 +178,7 @@ export default function TeacherPage() {
   }
 
   async function fetchAttendanceByDate() {
-    const { data } = await supabase
-      .from('attendance')
-      .select('student_id, status')
-      .eq('date', selectedDate)
-    
+    const { data } = await supabase.from('attendance').select('student_id, status').eq('date', selectedDate)
     const map: Record<string, 'PRESENT' | 'ABSENT'> = {}
     data?.forEach(record => {
       map[record.student_id] = record.status as 'PRESENT' | 'ABSENT'
@@ -209,18 +192,11 @@ export default function TeacherPage() {
     if (isNaN(num)) num = 0
     if (num < 0) num = 0
     if (num > 10) num = 10
-    
     setStudents(prev => prev.map(s => {
-      if (s.id === sid) {
-        return { ...s, grades: { ...s.grades, [block]: num }, last_sync_time: Date.now() }
-      }
+      if (s.id === sid) return { ...s, grades: { ...s.grades, [block]: num }, last_sync_time: Date.now() }
       return s
     }))
-
-    setPendingGrades(prev => ({
-      ...prev,
-      [sid]: { ...(prev[sid] || {}), [block]: num }
-    }))
+    setPendingGrades(prev => ({ ...prev, [sid]: { ...(prev[sid] || {}), [block]: num } }))
   }
 
   const toggleAttendance = async (sid: string) => {
@@ -264,7 +240,6 @@ export default function TeacherPage() {
     setIsSyncing(true)
     const gradesSnapshot = { ...pendingGrades }
     try {
-      // 1. Intentar guardado completo (incluyendo director)
       const dataFull = students.map(s => {
         const changes = gradesSnapshot[s.id] || {}
         return {
@@ -272,23 +247,11 @@ export default function TeacherPage() {
           block_1: changes.block_1 !== undefined ? Number(changes.block_1) : Number(s.grades.block_1),
           block_2: changes.block_2 !== undefined ? Number(changes.block_2) : Number(s.grades.block_2),
           block_3: changes.block_3 !== undefined ? Number(changes.block_3) : Number(s.grades.block_3),
-          director_grade: changes.director_grade !== undefined ? Number(changes.director_grade) : Number(s.grades.director_grade),
           updated_at: new Date().toISOString()
         }
       })
-
-      const { error: errorFull } = await supabase.from('grades').upsert(dataFull, { onConflict: 'student_id' })
-      
-      // 2. Si falla por la columna director_grade, intentamos guardar solo los bloques
-      if (errorFull && errorFull.message.includes('director_grade')) {
-        console.warn("Columna director_grade no encontrada, guardando bloques básicos...")
-        const dataBasic = dataFull.map(({ director_grade, ...rest }) => rest)
-        const { error: errorBasic } = await supabase.from('grades').upsert(dataBasic, { onConflict: 'student_id' })
-        if (errorBasic) throw errorBasic
-      } else if (errorFull) {
-        throw errorFull
-      }
-
+      const { error } = await supabase.from('grades').upsert(dataFull, { onConflict: 'student_id' })
+      if (error) throw error
       localStorage.setItem('edupro_full_students_cache', JSON.stringify(students))
       setPendingGrades(prev => {
         const next = { ...prev }
@@ -298,7 +261,6 @@ export default function TeacherPage() {
       alert("✅ ¡Calificaciones reflejadas en las boletas!")
     } catch (err) {
       console.error("Error en sync:", err)
-      alert("❌ Error al reflejar notas. Verifica tu conexión.")
     } finally {
       setIsSyncing(false)
     }
@@ -309,16 +271,27 @@ export default function TeacherPage() {
     try {
       const sidList = Array.from(changedAttendance)
       const absents = sidList.filter(sid => attendanceMap[sid] === 'ABSENT').map(sid => ({ student_id: sid, date: selectedDate, status: 'ABSENT' }))
-      const presents = sidList.filter(sid => attendanceMap[sid] === 'PRESENT')
       if (absents.length > 0) await supabase.from('attendance').upsert(absents, { onConflict: 'student_id,date' })
-      if (presents.length > 0) await supabase.from('attendance').delete().eq('date', selectedDate).in('student_id', presents)
       await fetchData()
       setChangedAttendance(new Set())
-      alert(`✅ Asistencia del ${selectedDate} guardada exitosamente.`)
+      alert(`✅ Asistencia guardada.`)
     } catch (err) {
       alert('❌ Error al guardar asistencia.')
     } finally {
       setIsSyncing(false)
+    }
+  }
+
+  const handleLogout = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        await supabase.from('profiles').update({ role: 'STUDENT' }).eq('id', user.id)
+      }
+      await supabase.auth.signOut()
+      router.push('/login')
+    } catch (err) {
+      router.push('/login')
     }
   }
 
@@ -333,10 +306,44 @@ export default function TeacherPage() {
     return days
   }
 
-  const filteredStudents = students.filter(s => 
-    s.full_name.toLowerCase().includes(search.toLowerCase()) || 
-    s.github_username.toLowerCase().includes(search.toLowerCase())
-  )
+  const filteredStudents = students.filter(s => s.full_name.toLowerCase().includes(search.toLowerCase()) || s.github_username.toLowerCase().includes(search.toLowerCase()))
+
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center p-6 font-sans">
+        <div className="max-w-md w-full bg-white rounded-[3.5rem] shadow-2xl p-12 text-center border-8 border-slate-800">
+           <div className="bg-indigo-600 w-24 h-24 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-indigo-200">
+              <Shield className="text-white h-12 w-12" />
+           </div>
+           <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tighter mb-4">Confirmar Identidad</h1>
+           <p className="text-slate-400 font-bold text-sm mb-10 leading-relaxed uppercase tracking-widest">Ingresa el código de acceso para desbloquear el panel de control maestro</p>
+           
+           <div className="space-y-6">
+              <div className="relative">
+                 <DatabaseZap className="absolute left-6 top-6 h-6 w-6 text-slate-300" />
+                 <input 
+                   type="password" 
+                   value={authCode}
+                   onChange={(e) => setAuthCode(e.target.value)}
+                   onKeyDown={(e) => e.key === 'Enter' && handleVerifyIdentity()}
+                   placeholder="CÓDIGO SECRETO"
+                   className="w-full bg-slate-50 border-none rounded-3xl py-6 pl-16 pr-8 font-black text-2xl text-slate-700 focus:ring-4 focus:ring-indigo-100 outline-none transition-all text-center tracking-[0.5em]"
+                 />
+              </div>
+              <button 
+                onClick={handleVerifyIdentity}
+                className="w-full bg-slate-900 text-white py-6 rounded-3xl font-black text-lg hover:bg-indigo-600 transition-all shadow-xl active:scale-95"
+              >
+                DESBLOQUEAR PANEL
+              </button>
+              <Link href="/student" className="block text-[10px] font-black text-slate-300 hover:text-indigo-500 uppercase tracking-[0.2em] transition-colors">
+                Volver al portal básico
+              </Link>
+           </div>
+        </div>
+      </div>
+    )
+  }
 
   if (loading) return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white gap-6">
@@ -350,28 +357,18 @@ export default function TeacherPage() {
       <aside className="w-80 bg-slate-900 hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl">
         <div className="p-10 border-b border-slate-800">
            <div className="flex items-center gap-4 mb-4">
-              <div className="bg-indigo-500 p-2.5 rounded-2xl shadow-lg">
-                <DatabaseZap className="text-white h-7 w-7" />
-              </div>
+              <div className="bg-indigo-500 p-2.5 rounded-2xl shadow-lg"><DatabaseZap className="text-white h-7 w-7" /></div>
               <span className="text-2xl font-black text-white tracking-tighter uppercase">EDU-PRO</span>
            </div>
            <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Servidor Nube Conectado</p>
         </div>
         <nav className="flex-1 p-6 space-y-4">
-          <button onClick={() => setActiveTab('grades')} className={`w-full flex items-center gap-4 px-6 py-5 rounded-[1.5rem] font-black transition-all ${activeTab === 'grades' ? 'bg-white text-slate-900 shadow-xl' : 'text-slate-500 hover:bg-slate-800'}`}>
-            <FileSpreadsheet className="h-5 w-5" /> BOLETAS
-          </button>
-          <button onClick={() => setActiveTab('attendance')} className={`w-full flex items-center gap-4 px-6 py-5 rounded-[1.5rem] font-black transition-all ${activeTab === 'attendance' ? 'bg-white text-slate-900 shadow-xl' : 'text-slate-500 hover:bg-slate-800'}`}>
-            <ClipboardCheck className="h-5 w-5" /> ASISTENCIA
-          </button>
+          <button onClick={() => setActiveTab('grades')} className={`w-full flex items-center gap-4 px-6 py-5 rounded-[1.5rem] font-black transition-all ${activeTab === 'grades' ? 'bg-white text-slate-900 shadow-xl' : 'text-slate-500 hover:bg-slate-800'}`}><FileSpreadsheet className="h-5 w-5" /> BOLETAS</button>
+          <button onClick={() => setActiveTab('attendance')} className={`w-full flex items-center gap-4 px-6 py-5 rounded-[1.5rem] font-black transition-all ${activeTab === 'attendance' ? 'bg-white text-slate-900 shadow-xl' : 'text-slate-500 hover:bg-slate-800'}`}><ClipboardCheck className="h-5 w-5" /> ASISTENCIA</button>
         </nav>
         <div className="p-8 border-t border-slate-800 space-y-2">
-           <Link href="/settings" className="flex items-center gap-4 px-6 py-3 text-slate-400 font-bold hover:text-indigo-400">
-              <Settings className="h-5 w-5" /> Ajustes
-           </Link>
-           <button onClick={() => supabase.auth.signOut().then(() => router.push('/login'))} className="flex items-center gap-4 px-6 py-3 text-red-500/70 font-bold w-full text-left">
-              <LogOut className="h-5 w-5" /> Salir
-           </button>
+           <Link href="/settings" className="flex items-center gap-4 px-6 py-3 text-slate-400 font-bold hover:text-indigo-400"><Settings className="h-5 w-5" /> Ajustes</Link>
+           <button onClick={handleLogout} className="flex items-center gap-4 px-6 py-3 text-red-500/70 font-bold w-full text-left"><LogOut className="h-5 w-5" /> Salir</button>
         </div>
       </aside>
 
@@ -380,8 +377,7 @@ export default function TeacherPage() {
           <div className="max-w-7xl mx-auto px-12 h-full flex items-center justify-between">
             <h2 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">{activeTab === 'grades' ? 'Edición de Boletas' : 'Registro de Asistencia'}</h2>
             <div className="relative">
-               <Search className="absolute left-5 top-4 h-5 w-5 text-slate-300" />
-               <input type="text" placeholder="Buscar..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-slate-50 border-2 border-transparent focus:border-indigo-600 rounded-[1.2rem] py-4 pl-14 pr-8 font-black text-slate-700 w-80 outline-none transition-all" />
+               <Search className="absolute left-5 top-4 h-5 w-5 text-slate-300" /><input type="text" placeholder="Buscar..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-slate-50 border-2 border-transparent focus:border-indigo-600 rounded-[1.2rem] py-4 pl-14 pr-8 font-black text-slate-700 w-80 outline-none transition-all" />
             </div>
           </div>
         </header>
@@ -397,50 +393,25 @@ export default function TeacherPage() {
                      <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))} className="p-3 text-white"><ChevronRight className="h-4 w-4" /></button>
                   </div>
                </div>
-                  <div className="grid grid-cols-7 gap-4">
-                     {['DOM', 'LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB'].map(d => <div key={d} className="text-center text-[10px] font-black text-slate-300 py-2">{d}</div>)}
-                     
-                     {/* Espacios en blanco para el inicio del mes */}
-                     {Array.from({ length: new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay() }).map((_, i) => (
-                       <div key={`empty-${i}`} className="aspect-square"></div>
-                     ))}
-
-                     {getDaysInMonth().map((date, i) => {
-                       if (!date) return <div key={i}></div>
-                       const dateStr = date.toISOString().split('T')[0]
-                       const isSelected = selectedDate === dateStr
-                       const hasData = markedDays.has(dateStr)
-
-                       return (
-                         <button 
-                           key={i} 
-                           onClick={() => setSelectedDate(dateStr)} 
-                           className={`aspect-square rounded-2xl border-4 transition-all flex flex-col items-center justify-center relative ${
-                             isSelected 
-                               ? 'bg-indigo-600 border-indigo-100 text-white shadow-xl scale-105 z-10' 
-                               : hasData
-                                 ? 'bg-white border-indigo-400 text-indigo-600 shadow-sm'
-                                 : 'bg-slate-50 border-transparent text-slate-400 hover:border-slate-200'
-                           }`}
-                         >
-                            <span className="text-xl font-black">{date.getDate()}</span>
-                            {hasData && !isSelected && (
-                              <div className="absolute top-2 right-2 h-2 w-2 bg-indigo-500 rounded-full animate-pulse"></div>
-                            )}
-                         </button>
-                       )
-                     })}
-                  </div>
-                  <div className="mt-6 flex justify-center gap-6">
-                     <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 rounded-full bg-indigo-500"></div>
-                        <span className="text-[10px] font-black text-slate-400 uppercase">Día con registros</span>
-                     </div>
-                     <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 rounded-full bg-slate-200"></div>
-                        <span className="text-[10px] font-black text-slate-400 uppercase">Sin registros</span>
-                     </div>
-                  </div>
+               <div className="grid grid-cols-7 gap-4">
+                  {['DOM', 'LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB'].map(d => <div key={d} className="text-center text-[10px] font-black text-slate-300 py-2">{d}</div>)}
+                  {Array.from({ length: new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay() }).map((_, i) => <div key={`empty-${i}`} className="aspect-square"></div>)}
+                  {getDaysInMonth().filter(d => d !== null).map((date, i) => {
+                    const dateStr = date!.toISOString().split('T')[0]
+                    const isSelected = selectedDate === dateStr
+                    const hasData = markedDays.has(dateStr)
+                    return (
+                      <button key={i} onClick={() => setSelectedDate(dateStr)} className={`aspect-square rounded-2xl border-4 transition-all flex flex-col items-center justify-center relative ${isSelected ? 'bg-indigo-600 border-indigo-100 text-white shadow-xl scale-105 z-10' : hasData ? 'bg-white border-indigo-400 text-indigo-600 shadow-sm' : 'bg-slate-50 border-transparent text-slate-400 hover:border-slate-200'}`}>
+                         <span className="text-xl font-black">{date!.getDate()}</span>
+                         {hasData && !isSelected && <div className="absolute top-2 right-2 h-2 w-2 bg-indigo-500 rounded-full animate-pulse"></div>}
+                      </button>
+                    )
+                  })}
+               </div>
+               <div className="mt-6 flex justify-center gap-6">
+                  <div className="flex items-center gap-2"><div className="h-3 w-3 rounded-full bg-indigo-500"></div><span className="text-[10px] font-black text-slate-400 uppercase">Día con registros</span></div>
+                  <div className="flex items-center gap-2"><div className="h-3 w-3 rounded-full bg-slate-200"></div><span className="text-[10px] font-black text-slate-400 uppercase">Sin registros</span></div>
+               </div>
             </section>
           )}
 
@@ -450,12 +421,7 @@ export default function TeacherPage() {
                 <tr className="bg-slate-50 border-b border-slate-100 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   <th className="p-12">Estudiante</th>
                   {activeTab === 'grades' ? (
-                    <>
-                      <th className="p-12 text-center">B1</th>
-                      <th className="p-12 text-center">B2</th>
-                      <th className="p-12 text-center">B3</th>
-                      <th className="p-12 text-center bg-indigo-50 text-indigo-600">PROM</th>
-                    </>
+                    <><th className="p-12 text-center">B1</th><th className="p-12 text-center">B2</th><th className="p-12 text-center">B3</th><th className="p-12 text-center bg-indigo-50 text-indigo-600">PROM</th></>
                   ) : (
                     <><th className="p-12 text-center">Asistencia {selectedDate}</th><th className="p-12 text-center">Total Faltas</th></>
                   )}
@@ -474,10 +440,7 @@ export default function TeacherPage() {
                       <td className="p-12">
                         <div className="flex items-center gap-6">
                           <div className="h-16 w-16 rounded-[1.5rem] bg-slate-900 flex items-center justify-center font-black text-white text-2xl shadow-xl">{s.full_name.charAt(0)}</div>
-                          <div>
-                             <p className="font-black text-slate-900 text-xl uppercase tracking-tighter">{s.full_name}</p>
-                             <p className="text-xs font-bold text-slate-400">@{s.github_username}</p>
-                          </div>
+                          <div><p className="font-black text-slate-900 text-xl uppercase tracking-tighter">{s.full_name}</p><p className="text-xs font-bold text-slate-400">@{s.github_username}</p></div>
                         </div>
                       </td>
                       {activeTab === 'grades' ? (
